@@ -56,7 +56,6 @@ namespace WpfApp1
             var g1 = Graph.GenerateGraph(Convert.ToInt32(NumOfVertcs.Text));
             //var matrix = g1.GenerateAdciedenceMatrix(int.Parse(Degree.Text));
             ////var matrix = g1.GenerateMatrix(int.Parse(Degree.Text));
-            var matrix = g1.GenerateAjacenceMatrixBeta(int.Parse(Degree.Text));
             //g1.GenerateEdges(matrix);
             g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
             Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
