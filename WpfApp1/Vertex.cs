@@ -17,5 +17,6 @@ namespace WpfApp1
             Y = y;
             Id = id;
         }
+        public List<Edge> ListOfEdgesContainingVertex = new List<Edge>();
     }
 }

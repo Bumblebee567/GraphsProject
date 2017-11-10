@@ -111,5 +111,9 @@ namespace WpfApp1
                 }
             }
         }
+        public void GenerateEdgesOfRandomGraph(Graph graph, int degree)
+        {
+
+        }
     }
 }
