@@ -116,7 +116,6 @@ namespace WpfApp1
         {
             int counter = 0;
             int remainingEdges = 0;
-            Vertex vertexToConnect = new Vertex();
             List<Vertex> verticesToConnect = new List<Vertex>(); //lista potencjalnych wierzchołków do połączenia
             for (int i = 0; i < graph.ListOfVertices.Count; i++)
             {
@@ -137,12 +136,16 @@ namespace WpfApp1
                     //pętla tworzy listę potencjalnych wierzchołków, do których może być poprowadzona krawędź z wierzchołka
                     for (int k = 0; k < graph.ListOfVertices.Count; k++)
                     {
-                        if (graph.ListOfVertices[k] != graph.ListOfVertices[i])
+                        if (graph.ListOfVertices[k] != graph.ListOfVertices[i] && CountNumberOfEdgesCointaingVertex(graph, graph.ListOfVertices[k]) != degree)
                         {
                             verticesToConnect.Add(graph.ListOfVertices[k]);
                         }
                     }
-                    
+                    //mamy dodane wierzchołki, do których możemy proprawdzić krawędzie z obecnego wierzchołka
+                    for (int j = 0; j <= remainingEdges; j++)
+                    {
+                        graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = verticesToConnect[rnd.Next(0, verticesToConnect.Count)] });
+                    }
                 }
             }
         }
