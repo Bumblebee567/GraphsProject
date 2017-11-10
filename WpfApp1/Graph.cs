@@ -99,6 +99,32 @@ namespace WpfApp1
             }
             return matrix;
         }
+        public int[,] GenerateAjacenceMatrixBeta(int degree)
+        {
+            int[,] matrix = new int[NumberOfVertices, NumberOfVertices];
+            int randomIndex = 0;
+            //wypełnienie macierzy zerami
+            for (int i = 0; i < NumberOfVertices; i++)
+            {
+                for (int j = 0; j < NumberOfVertices; j++)
+                {
+                    matrix[i, j] = 0;
+                }
+            }
+            for (int i = 0; i < NumberOfVertices; i++)
+            {
+                for (int c = 0; c < degree; c++)
+                {
+                    randomIndex = rnd.Next(0, NumberOfVertices - 1);
+                    if (randomIndex != i)
+                        matrix[i, randomIndex] = 1;
+                    else
+                        c--;
+                }
+            }
+            return matrix;
+        }
+        
         public void GenerateEdges(int[,] matrix)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
