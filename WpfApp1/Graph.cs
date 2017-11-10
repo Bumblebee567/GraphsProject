@@ -124,27 +124,39 @@ namespace WpfApp1
                     //z wierzchołka 0 tworzy liczbę krawędzi taką jak stopień grafu
                     for (int j = 0; j < degree; j++)
                     {
-                        graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = graph.ListOfVertices[rnd.Next(i + 1, graph.ListOfVertices.Count - 1)] });
+                        graph.ListOfEdges.Add(new Edge
+                        {
+                            StartPoint = graph.ListOfVertices[i],
+                            EndPoint = graph.ListOfVertices[rnd.Next(i + 1, graph.ListOfVertices.Count - 1)]
+                        });
                     }
                 }
                 else
                 {
                     //sprawdza ile krawędzi zawiera w sobie dany wierzchołek
                     counter = CountNumberOfEdgesCointaingVertex(graph, graph.ListOfVertices[i]);
-                    //wyznacza ile krawędzi wychodzących/wchodzących do/z wierzchołka brakuje by miał stopień degree-1
-                    remainingEdges = (degree) - counter;
-                    //pętla tworzy listę potencjalnych wierzchołków, do których może być poprowadzona krawędź z wierzchołka
-                    for (int k = 0; k < graph.ListOfVertices.Count; k++)
+                    if (counter >= degree)
+                        continue;
+                    else if (counter < degree)
                     {
-                        if (graph.ListOfVertices[k] != graph.ListOfVertices[i] && CountNumberOfEdgesCointaingVertex(graph, graph.ListOfVertices[k]) != degree)
+                        //wyznacza ile krawędzi wychodzących/wchodzących do/z wierzchołka brakuje by miał stopień degree-1
+                        remainingEdges = (degree) - counter;
+                        //pętla tworzy listę potencjalnych wierzchołków, do których może być poprowadzona krawędź z wierzchołka
+                        for (int k = 0; k < graph.ListOfVertices.Count; k++)
                         {
-                            verticesToConnect.Add(graph.ListOfVertices[k]);
+                            if (graph.ListOfVertices[k] != graph.ListOfVertices[i] && CountNumberOfEdgesCointaingVertex(graph, graph.ListOfVertices[k]) < degree)
+                            {
+                                verticesToConnect.Add(graph.ListOfVertices[k]);
+                            }
                         }
-                    }
-                    //mamy dodane wierzchołki, do których możemy proprawdzić krawędzie z obecnego wierzchołka
-                    for (int j = 0; j <= remainingEdges; j++)
-                    {
-                        graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = verticesToConnect[rnd.Next(0, verticesToConnect.Count)] });
+                        //mamy dodane wierzchołki, do których możemy proprawdzić krawędzie z obecnego wierzchołka
+                        for (int j = 0; j < remainingEdges; j++)
+                        {
+                            if (j >= verticesToConnect.Count)
+                                break;
+                            graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = verticesToConnect[j] });
+                        }
+                        verticesToConnect.Clear();
                     }
                 }
             }

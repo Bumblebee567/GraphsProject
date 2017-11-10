@@ -54,9 +54,10 @@ namespace WpfApp1
         private void GrafOkreślony_Click(object sender, RoutedEventArgs e)
         {
             var g1 = Graph.GenerateGraph(Convert.ToInt32(NumOfVertcs.Text));
-            var matrix = g1.GenerateAdciedenceMatrix(int.Parse(Degree.Text));
-            //var matrix = g1.GenerateMatrix(int.Parse(Degree.Text));
-            g1.GenerateEdges(matrix);
+            //var matrix = g1.GenerateAdciedenceMatrix(int.Parse(Degree.Text));
+            ////var matrix = g1.GenerateMatrix(int.Parse(Degree.Text));
+            //g1.GenerateEdges(matrix);
+            g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
             Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
             //edgesToDraw[0] = new Line();
             //edgesToDraw[0].Stroke = System.Windows.Media.Brushes.Brown;
@@ -98,10 +99,10 @@ namespace WpfApp1
                 {
                     p.myEllipse.Fill = Brushes.Red;
                 }
-                //p.TextBlock.Text = i.ToString();
+                p.TextBlock.Text = i.ToString();
                 double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                 double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
-                p.myEllipse.Margin = new Thickness(left, top, 0, 0);
+                p.Margin = new Thickness(left, top, 0, 0);
                 Canvas1.Children.Add(p);
             }
         }
