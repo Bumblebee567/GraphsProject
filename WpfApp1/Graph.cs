@@ -10,6 +10,7 @@ namespace WpfApp1
 {
     class Graph
     {
+        static Random rnd = new Random();
         public int NumberOfVertices { get; set; }
         public List<Vertex> ListOfVertices = new List<Vertex>();
         public List<Edge> ListOfEdges = new List<Edge>();
@@ -113,7 +114,41 @@ namespace WpfApp1
         }
         public void GenerateEdgesOfRandomGraph(Graph graph, int degree)
         {
-
+            int counter = 0;
+            int remainingEdges = 0;
+            Vertex vertexToConnect = new Vertex();
+            List<Vertex> verticesToConnect = new List<Vertex>(); //lista potencjalnych wierzchołków do połączenia
+            for (int i = 0; i < graph.ListOfVertices.Count; i++)
+            {
+                if (i == 0)
+                {
+                    //z wierzchołka 0 tworzy liczbę krawędzi taką jak stopień grafu
+                    for (int j = 0; j < degree; j++)
+                    {
+                        graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = graph.ListOfVertices[rnd.Next(i + 1, graph.ListOfVertices.Count - 1)] });
+                    }
+                }
+                else
+                {
+                    //sprawdza ile krawędzi zawiera w sobie dany wierzchołek
+                    counter = CountNumberOfEdgesCointaingVertex(graph, graph.ListOfVertices[i]);
+                    //wyznacza ile krawędzi wychodzących/wchodzących do/z wierzchołka brakuje by miał stopień degree-1
+                    remainingEdges = (degree) - counter;
+                    //pętla tworzy listę potencjalnych wierzchołków, do których może być poprowadzona krawędź z wierzchołka
+                    for (int k = 0; k < graph.ListOfVertices.Count; k++)
+                    {
+                        if (graph.ListOfVertices[k] != graph.ListOfVertices[i])
+                        {
+                            verticesToConnect.Add(graph.ListOfVertices[k]);
+                        }
+                    }
+                    
+                }
+            }
+        }
+        public int CountNumberOfEdgesCointaingVertex(Graph graph, Vertex vertex)
+        {
+            return graph.ListOfEdges.Where(x => x.StartPoint == vertex || x.EndPoint == vertex).Count();
         }
     }
 }

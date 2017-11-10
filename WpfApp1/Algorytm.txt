@@ -1,0 +1,6 @@
+﻿1. sprawdź jaki stopień ma wierzchołek
+	-jeśli ma stopień == degree: break
+	-jeśli ma stopień < degree: int remainingNumber = degree - counter
+2. pętla do i =< rnd.Next(0, remainingNumber)
+	-pętla do j < graph.ListOfVertices.Count
+		
