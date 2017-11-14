@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="30">
     <Grid Background="Transparent">
-        <Ellipse Name="myEllipse" Width="20" Height="20" Fill="Yellow" StrokeThickness="2" Stroke="Black"/>
-        <TextBlock Name="TextBlock" TextAlignment="Center" FontSize="11"/>
+        <Ellipse Name="myEllipse" Width="25" Height="25" Fill="Yellow" StrokeThickness="2" Stroke="Black"/>
+        <TextBlock Name="TextBlock" TextAlignment="Center" FontSize="16"/>
     </Grid>
 </UserControl>
