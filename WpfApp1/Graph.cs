@@ -384,5 +384,16 @@ namespace WpfApp1
                 return true;
             }
         }
+        public int[,] GenerateAdjacencyMatrix()
+        {
+            int[,] matrix = new int[NumberOfVertices, NumberOfVertices];
+            for (int i = 0; i < NumberOfVertices; i++)
+            {
+                for (int j = 0; j < NumberOfVertices; j++)
+                {
+                    
+                }
+            }
+        }
     }
 }
