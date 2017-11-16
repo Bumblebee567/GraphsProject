@@ -53,11 +53,17 @@ namespace WpfApp1
 
         private void GrafOkreślony_Click(object sender, RoutedEventArgs e)
         {
-            var g1 = Graph.GenerateGraph(Convert.ToInt32(NumOfVertcs.Text));
+            //var g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
+            var g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
+            bool isDrawn = false;
             //var matrix = g1.GenerateAdciedenceMatrix(int.Parse(Degree.Text));
             ////var matrix = g1.GenerateMatrix(int.Parse(Degree.Text));
             //g1.GenerateEdges(matrix);
-            g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
+            //g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
+            while (isDrawn == false)
+            {
+                isDrawn = g1.GenerateEdgesOfRegularGraph(Convert.ToInt32(NumOfVertcs.Text), Convert.ToInt32(Degree.Text), g1);
+            }
             Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
             //edgesToDraw[0] = new Line();
             //edgesToDraw[0].Stroke = System.Windows.Media.Brushes.Brown;

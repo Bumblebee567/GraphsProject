@@ -54,7 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Bucket.cs" />
     <Compile Include="Edge.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="PointVer.xaml.cs">
       <DependentUpon>PointVer.xaml</DependentUpon>
     </Compile>
