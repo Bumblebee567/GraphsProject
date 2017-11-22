@@ -21,5 +21,6 @@ namespace WpfApp1
         {
 
         }
+        public List<Vertex> ConnectedVertices = new List<Vertex>();
     }
 }

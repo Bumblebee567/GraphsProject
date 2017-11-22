@@ -137,8 +137,8 @@ namespace WpfApp1
         //    }
         //    return matrix;
         //}
-        
-        
+
+
         //public void GenerateEdgesFromMatrix(int[,] matrix)
         //{
         //    for (int i = 0; i < matrix.GetLength(0); i++)
@@ -320,6 +320,7 @@ namespace WpfApp1
                     });
                     var bucketToDelete = container.ConnectedBuckets[i].ConnectedBuckets.Where(x => x.Id == container.Id).First();
                     container.ConnectedBuckets[i].ConnectedBuckets.Remove(bucketToDelete);
+                    ListOfVertices[Array.IndexOf(pointsContainers, container)].ConnectedVertices.Add(ListOfVertices[Array.IndexOf(pointsContainers, container.ConnectedBuckets[i])]);
                 }
             }
             return true;
@@ -391,9 +392,18 @@ namespace WpfApp1
             {
                 for (int j = 0; j < NumberOfVertices; j++)
                 {
-                    
+                    matrix[i, j] = 0;
                 }
             }
+            for (int i = 0; i < NumberOfVertices; i++)
+            {
+                for (int j = 0; j < ListOfVertices[i].ConnectedVertices.Count; j++)
+                {
+                    matrix[i, ListOfVertices[i].ConnectedVertices[j].Id] = 1;
+                    matrix[ListOfVertices[i].ConnectedVertices[j].Id, i] = 1;
+                }
+            }
+            return matrix;
         }
     }
 }

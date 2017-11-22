@@ -108,5 +108,8 @@
   <ItemGroup>
     <Resource Include="Algorytm.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons8-Ios7-Maps-Polygon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

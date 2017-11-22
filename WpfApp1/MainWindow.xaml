@@ -5,81 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="980">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.0,0">
-                <GradientStop Color="#A6A6A6" Offset="0.1"></GradientStop>
-                <GradientStop Color="#727272" Offset="0.9"></GradientStop>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions> 
-
-        <Grid Grid.Row="1" Grid.Column="1">
+        ResizeMode="CanMinimize"
+        Icon="Icons8-Ios7-Maps-Polygon.ico"
+        Background="Silver"
+        WindowStartupLocation="CenterScreen"
+        Title="Graph generator v0.2" Height="650" Width="980">
+    <Border Padding="20">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*">
-                </ColumnDefinition>
-                <ColumnDefinition Width="0.2*"/>
-                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Grid Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0*"/>
-                    <RowDefinition Height="0"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="*"/>
-
-                    <RowDefinition Height="40*"/>
-
-
-
-                </Grid.RowDefinitions>
-                
-                <Button Grid.Row="2" Grid.Column="0" x:Name="LosowyGraf" Content="Rysuj graf" FontSize="18" Click="GrafOkreślony_Click"></Button>
-
-                <Button Grid.Row="6" Grid.Column="0" x:Name="Wyczyść" Content="Wyczyść" Click="Wyczyść_Click" FontSize="18"></Button>
-            
-                <RichTextBox Grid.Row="9" Background="White" x:Name="PanelInformacyjny"></RichTextBox>
-
-                 <Grid Grid.Row="4">
-                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="0.05*"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                     
-                    <Label Grid.Row="0" Grid.Column="0" Content="Stopień" Background="AliceBlue" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"></Label>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Liczba wierzchołków" Background="AliceBlue" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"></Label>
-                    <TextBox Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Name="Degree"></TextBox>
-                    <TextBox Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Name="NumOfVertcs"></TextBox>
-
-
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Label Content="Liczba wierzchołków" FontSize="18"/>
+                    <Label Content="Stopień grafu" FontSize="18" Margin="0 34 0 0"/>
+                    <Label Content="Wierzchołki regularne" FontSize="18" Margin="0 70 0 0"/>
+                    <Label Content="Wierzchołki losowe" FontSize="18" Margin="0 100 0 0"/>
                 </Grid>
-
+                <Grid Grid.Column="1">
+                    <TextBox Height="30" Name="NumOfVertcs"  Margin="0 0 10 545" FontSize="18" TextAlignment="Center"/>
+                    <TextBox Height="30" Name="Degree"  Margin="0 0 10 478" FontSize="18" TextAlignment="Center"/>
+                    <CheckBox Name="RegVertcs" Margin="0 81 0 0"/>
+                    <CheckBox Name="RndVertcs" Margin="0 111 0 0"/>
+                </Grid>
             </Grid>
-
-            <StackPanel Grid.Column="2" x:Name="StackPane" Background="AliceBlue">
-                <Canvas Width="619" Height="571" Name="Canvas1"/>
-            </StackPanel>
+            
+            <Label Content="Opcje: " FontSize="18" Margin="0 130"/>
+            <Button Height="35" Width="200" Margin="0 0 0 180" Name="GenerateSimple" Content="Generuj graf prosty" FontSize="17" Click="GenerateSimple_Click"/>
+            <Button Height="35" Width="200" Margin="0 0 0 100" Name="GenerateRegular" Content="Generuj graf regularny" FontSize="17" Click="GenerateRegular_Click"/>
+            <Button Height="35" Width="200" Margin="0 0 0 20" Name="Clear" Content="Czyść" FontSize="17" Click="Wyczyść_Click"/>
+            <Grid Grid.Column="1">
+                <Canvas Width="619" Height="571" Background="White" Name ="Canvas1"/>
+            </Grid>
         </Grid>
-        
-    </Grid>
+    </Border>
 </Window>
