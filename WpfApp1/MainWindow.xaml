@@ -9,7 +9,7 @@
         Icon="Icons8-Ios7-Maps-Polygon.ico"
         Background="Silver"
         WindowStartupLocation="CenterScreen"
-        Title="Graph generator v0.2" Height="650" Width="980">
+        Title="Graph generator v 1.0" Height="650" Width="980">
     <Border Padding="20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -38,7 +38,8 @@
             <Label Content="Opcje: " FontSize="18" Margin="0 130"/>
             <Button Height="35" Width="200" Margin="0 0 0 180" Name="GenerateSimple" Content="Generuj graf prosty" FontSize="17" Click="GenerateSimple_Click"/>
             <Button Height="35" Width="200" Margin="0 0 0 100" Name="GenerateRegular" Content="Generuj graf regularny" FontSize="17" Click="GenerateRegular_Click"/>
-            <Button Height="35" Width="200" Margin="0 0 0 20" Name="Clear" Content="Czyść" FontSize="17" Click="Wyczyść_Click"/>
+            <Button Height="35" Width="200" Margin="0 0 0 20" Name="Search" Content="Przeszukaj graf wszerz" FontSize="17" Click="Search_Click"/>
+            <Button Height="35" Width="200" Margin="0 0 0 -60" Name="Clear" Content="Czyść" FontSize="17" Click="Wyczyść_Click"/>
             <Grid Grid.Column="1">
                 <Canvas Width="619" Height="571" Background="White" Name ="Canvas1"/>
             </Grid>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +24,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        static Graph g1;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace WpfApp1
         {
             if (RegVertcs.IsChecked == true)
             {
-                var g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
+                g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
                 Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
                 for (int i = 0; i < g1.ListOfEdges.Count; i++)
@@ -71,7 +73,7 @@ namespace WpfApp1
             }
             else if (RndVertcs.IsChecked == true)
             {
-                var g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
+                g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
                 g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
                 Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
                 for (int i = 0; i < g1.ListOfEdges.Count; i++)
@@ -105,7 +107,7 @@ namespace WpfApp1
         {
             if (RegVertcs.IsChecked == true)
             {
-                var g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
+                g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 bool isDrawn = false;
                 while (isDrawn == false)
                 {
@@ -139,7 +141,7 @@ namespace WpfApp1
             }
             else if (RndVertcs.IsChecked == true)
             {
-                var g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
+                g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
                 bool isDrawn = false;
                 while (isDrawn == false)
                 {
@@ -171,6 +173,19 @@ namespace WpfApp1
                     Canvas1.Children.Add(p);
                 }
             }
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            var matrix = g1.GenerateAdjacencyMatrix();
+            var a = Graph.BFS(matrix, g1);
+            var sb = new StringBuilder();
+            for (int i = 0; i < a.Count; i++)
+            {
+                sb.Append(a[i]);
+            }
+            File.AppendAllText("wyniki.txt", sb.ToString());
+            Process.Start("C:/Users/Admin/Source/Repos/GraphsProject3/WpfApp1/bin/Debug/test.txt");
         }
     }
 }

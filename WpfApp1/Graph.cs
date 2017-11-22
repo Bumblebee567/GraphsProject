@@ -405,5 +405,29 @@ namespace WpfApp1
             }
             return matrix;
         }
+        public static List<int> BFS(int[,] adjacencyMatrix, Graph g)
+        {
+            Stack<int> stack = new Stack<int>();
+            List<int> results = new List<int>();
+            stack.Push(g.ListOfVertices[0].Id);
+            bool[] visitedVertices = new bool[adjacencyMatrix.Length];
+            while(stack.Count != 0)
+            {
+                int takenVertex = stack.Pop();
+                if(visitedVertices[takenVertex] == false)
+                {
+                    visitedVertices[takenVertex] = true;
+                    for (int i = adjacencyMatrix.GetLength(0)-1; i >= 0; i--)
+                    {
+                        if(adjacencyMatrix[takenVertex, i]!=0)
+                        {
+                            stack.Push(i);
+                        }
+                    }
+                    results.Add(takenVertex);
+                }
+            }
+            return results;
+        }
     }
 }
