@@ -178,14 +178,24 @@ namespace WpfApp1
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             var matrix = g1.GenerateAdjacencyMatrix();
-            var a = Graph.BFS(matrix, g1);
             var sb = new StringBuilder();
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    sb.Append(matrix[i, j] + " ");
+                }
+                sb.AppendLine();
+            }
+            sb.AppendLine();
+            var a = Graph.BFS(matrix, g1);
             for (int i = 0; i < a.Count; i++)
             {
-                sb.Append(a[i]);
+                sb.Append(a[i]+" ");
             }
+            File.WriteAllText("wyniki.txt", string.Empty);
             File.AppendAllText("wyniki.txt", sb.ToString());
-            Process.Start("C:/Users/Admin/Source/Repos/GraphsProject3/WpfApp1/bin/Debug/test.txt");
+            Process.Start("C:/Users/Admin/Source/Repos/GraphsProject3/WpfApp1/bin/Debug/wyniki.txt");
         }
     }
 }

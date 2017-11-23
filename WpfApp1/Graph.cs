@@ -195,6 +195,7 @@ namespace WpfApp1
                             if (j >= verticesToConnect.Count)
                                 break;
                             graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = verticesToConnect[j] });
+                            graph.ListOfVertices[i].ConnectedVertices.Add(verticesToConnect[j]);
                         }
                         verticesToConnect.Clear();
                     }
