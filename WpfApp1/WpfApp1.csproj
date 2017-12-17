@@ -60,6 +60,7 @@
     <Compile Include="PointVer.xaml.cs">
       <DependentUpon>PointVer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utiles.cs" />
     <Compile Include="Vertex.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
