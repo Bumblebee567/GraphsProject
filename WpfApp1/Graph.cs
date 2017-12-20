@@ -412,15 +412,15 @@ namespace WpfApp1
             List<int> results = new List<int>();
             stack.Push(g.ListOfVertices[0].Id);
             bool[] visitedVertices = new bool[adjacencyMatrix.Length];
-            while(stack.Count != 0)
+            while (stack.Count != 0)
             {
                 int takenVertex = stack.Pop();
-                if(visitedVertices[takenVertex] == false)
+                if (visitedVertices[takenVertex] == false)
                 {
                     visitedVertices[takenVertex] = true;
-                    for (int i = adjacencyMatrix.GetLength(0)-1; i >= 0; i--)
+                    for (int i = adjacencyMatrix.GetLength(0) - 1; i >= 0; i--)
                     {
-                        if(adjacencyMatrix[takenVertex, i]!=0)
+                        if (adjacencyMatrix[takenVertex, i] != 0)
                         {
                             stack.Push(i);
                         }
@@ -429,6 +429,34 @@ namespace WpfApp1
                 }
             }
             return results;
+        }
+        public void ColorVerticesOfGraph()
+        {
+            List<Brush> colorsToRemove = new List<Brush>();
+            List<Brush> tableAfterRemoving = new List<Brush>();
+            List<int> indexesToRemove = new List<int>();
+            var table = Utiles.GenerateRandomBrushes(ListOfVertices.Count);
+            for (int i = 0; i < ListOfVertices.Count; i++)
+            {
+                if (i == 0)
+                {
+                    ListOfVertices[i].Color = table.First();
+                }
+                else
+                {
+                    foreach (var vertex in ListOfVertices[i].ConnectedVertices)
+                    {
+                        indexesToRemove.Add(Array.IndexOf(table, vertex.Color));
+                    }
+                    tableAfterRemoving = table.ToList();
+                    for (int j = 0; j < colorsToRemove.Count; j++)
+                    {
+                        tableAfterRemoving.RemoveAt(indexesToRemove[j]);
+                    }
+                    ListOfVertices[i].Color = tableAfterRemoving.First();
+                    tableAfterRemoving.Clear();
+                }
+            }
         }
     }
 }

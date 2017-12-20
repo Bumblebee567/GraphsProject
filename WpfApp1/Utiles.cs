@@ -10,7 +10,7 @@ namespace WpfApp1
 {
     class Utiles
     {
-        private Brush[] GenerateRandomBrushes(int size)
+        public static Brush[] GenerateRandomBrushes(int size)
         {
             Brush result = Brushes.Transparent;
 
