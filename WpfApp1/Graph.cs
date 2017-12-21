@@ -195,11 +195,17 @@ namespace WpfApp1
                             if (j >= verticesToConnect.Count)
                                 break;
                             graph.ListOfEdges.Add(new Edge { StartPoint = graph.ListOfVertices[i], EndPoint = verticesToConnect[j] });
-                            graph.ListOfVertices[i].ConnectedVertices.Add(verticesToConnect[j]);
+                            //graph.ListOfVertices[i].ConnectedVertices.Add(verticesToConnect[j]);
+                            //graph.ListOfVertices[j].ConnectedVertices.Add(verticesToConnect[i]);
                         }
                         verticesToConnect.Clear();
                     }
                 }
+            }
+            for (int i = 0; i < ListOfEdges.Count; i++)
+            {
+                ListOfEdges[i].StartPoint.ConnectedVertices.Add(ListOfEdges[i].EndPoint);
+                ListOfEdges[i].EndPoint.ConnectedVertices.Add(ListOfEdges[i].StartPoint);
             }
         }
         public int CountNumberOfEdgesCointaingVertex(Graph graph, Vertex vertex)
@@ -322,6 +328,8 @@ namespace WpfApp1
                     var bucketToDelete = container.ConnectedBuckets[i].ConnectedBuckets.Where(x => x.Id == container.Id).First();
                     container.ConnectedBuckets[i].ConnectedBuckets.Remove(bucketToDelete);
                     ListOfVertices[Array.IndexOf(pointsContainers, container)].ConnectedVertices.Add(ListOfVertices[Array.IndexOf(pointsContainers, container.ConnectedBuckets[i])]);
+                    ListOfVertices[Array.IndexOf(pointsContainers, container.ConnectedBuckets[i])].ConnectedVertices.Add(ListOfVertices[Array.IndexOf(pointsContainers, container)]);
+
                 }
             }
             return true;
@@ -440,21 +448,34 @@ namespace WpfApp1
             {
                 if (i == 0)
                 {
-                    ListOfVertices[i].Color = table.First();
+                    ListOfVertices[i].Color = table[0];
                 }
                 else
                 {
+                    bool[] checkerTab = new bool[ListOfVertices.Count];
+                    checkerTab = checkerTab.Select(x => x = true).ToArray();
                     foreach (var vertex in ListOfVertices[i].ConnectedVertices)
                     {
-                        indexesToRemove.Add(Array.IndexOf(table, vertex.Color));
+                        if (vertex.Color != null)
+                        {
+                            //indexesToRemove.Add(Array.IndexOf(table, vertex.Color));
+                            checkerTab[Array.IndexOf(table, vertex.Color)] = false;
+                        }
                     }
-                    tableAfterRemoving = table.ToList();
-                    for (int j = 0; j < colorsToRemove.Count; j++)
+                    //tableAfterRemoving = table.ToList();
+                    //for (int j = 0; j < colorsToRemove.Count; j++)
+                    //{
+                    //    tableAfterRemoving.RemoveAt(indexesToRemove[j]);
+                    //}
+                    for (int j = 0; j < checkerTab.Length; j++)
                     {
-                        tableAfterRemoving.RemoveAt(indexesToRemove[j]);
+                        if (checkerTab[j] == true)
+                        {
+                            ListOfVertices[i].Color = table[j];
+                            break;
+                        }
                     }
-                    ListOfVertices[i].Color = tableAfterRemoving.First();
-                    tableAfterRemoving.Clear();
+                    //tableAfterRemoving.Clear();
                 }
             }
         }

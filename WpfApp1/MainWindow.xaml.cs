@@ -57,14 +57,16 @@ namespace WpfApp1
                     edgesToDraw[i].StrokeThickness = 2;
                     Canvas1.Children.Add(edgesToDraw[i]);
                 }
+                g1.ColorVerticesOfGraph();
                 for (int i = 0; i < g1.ListOfVertices.Count; i++)
                 {
                     var p = new PointVer();
-                    if (i % 2 == 0)
-                    {
-                        p.myEllipse.Fill = Brushes.Red;
-                    }
-                    p.TextBlock.Text = i.ToString();
+                    //if (i % 2 == 0)
+                    //{
+                    //    p.myEllipse.Fill = Brushes.Red;
+                    //}
+                    p.myEllipse.Fill = g1.ListOfVertices[i].Color;
+                    p.TextBlock.Text = g1.ListOfVertices[i].Id.ToString();
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
@@ -87,14 +89,16 @@ namespace WpfApp1
                     edgesToDraw[i].StrokeThickness = 2;
                     Canvas1.Children.Add(edgesToDraw[i]);
                 }
+                g1.ColorVerticesOfGraph();
                 for (int i = 0; i < g1.ListOfVertices.Count; i++)
                 {
                     var p = new PointVer();
-                    if (i % 2 == 0)
-                    {
-                        p.myEllipse.Fill = Brushes.Red;
-                    }
-                    p.TextBlock.Text = i.ToString();
+                    //if (i % 2 == 0)
+                    //{
+                    //    p.myEllipse.Fill = Brushes.Red;
+                    //}
+                    p.myEllipse.Fill = g1.ListOfVertices[i].Color;
+                    p.TextBlock.Text = g1.ListOfVertices[i].Id.ToString();
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
@@ -161,13 +165,15 @@ namespace WpfApp1
                     edgesToDraw[i].StrokeThickness = 2;
                     Canvas1.Children.Add(edgesToDraw[i]);
                 }
+                g1.ColorVerticesOfGraph();
                 for (int i = 0; i < g1.ListOfVertices.Count; i++)
                 {
                     var p = new PointVer();
-                    if (i % 2 == 0)
-                    {
-                        p.myEllipse.Fill = Brushes.Red;
-                    }
+                    //if (i % 2 == 0)
+                    //{
+                    //    p.myEllipse.Fill = Brushes.Red;
+                    //}
+                    p.myEllipse.Fill = g1.ListOfVertices[i].Color;
                     p.TextBlock.Text = g1.ListOfVertices[i].Id.ToString();
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
