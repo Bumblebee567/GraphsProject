@@ -41,6 +41,7 @@ namespace WpfApp1
 
         private void GenerateSimple_Click(object sender, RoutedEventArgs e)
         {
+            TypeLabel.Content = "Graf prosty";
             if (RegVertcs.IsChecked == true)
             {
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
@@ -109,6 +110,7 @@ namespace WpfApp1
 
         private void GenerateRegular_Click(object sender, RoutedEventArgs e)
         {
+            TypeLabel.Content = "Graf regularny";
             if (RegVertcs.IsChecked == true)
             {
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
