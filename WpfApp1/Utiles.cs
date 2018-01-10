@@ -41,7 +41,7 @@ namespace WpfApp1
                 Brushes.DarkKhaki,
                 Brushes.DarkViolet,
                 Brushes.Fuchsia,
-                Brushes.Gold,
+                Brushes.LightPink,
                 Brushes.GreenYellow,
                 Brushes.Honeydew,
                 Brushes.HotPink,
@@ -50,7 +50,8 @@ namespace WpfApp1
                 Brushes.LightBlue,
                 Brushes.LightYellow,
                 Brushes.Linen,
-                Brushes.Orange
+                Brushes.Orange,
+                Brushes.Salmon
             };
             return results.Take(size).ToArray();
         }

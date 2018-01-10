@@ -33,6 +33,7 @@ namespace WpfApp1
         private void Wyczyść_Click(object sender, RoutedEventArgs e)
         {
             Canvas1.Children.Clear();
+            TypeLabel.Content = String.Empty;
         }
 
         private void GrafOkreślony_Click(object sender, RoutedEventArgs e)
@@ -41,6 +42,18 @@ namespace WpfApp1
 
         private void GenerateSimple_Click(object sender, RoutedEventArgs e)
         {
+            if (NumOfVertcs.Text == "" || Degree.Text == "")
+            {
+                MessageBox.Show("Nie można wygenerować grafu - brak danych", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            if (Convert.ToInt32(NumOfVertcs.Text) <= Convert.ToInt32(Degree.Text))
+            {
+                MessageBox.Show("Nie można wygenerować grafu", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                NumOfVertcs.Text = String.Empty;
+                Degree.Text = String.Empty;
+                return;
+            }
             TypeLabel.Content = "Graf prosty";
             if (RegVertcs.IsChecked == true)
             {
@@ -71,6 +84,8 @@ namespace WpfApp1
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
+                    TypeLabel.Content = String.Empty;
+                    TypeLabel.Content = $"Liczba użytych kolorów: {g1.ListOfVertices.GroupBy(x => x.Color).Count()}";
                     Canvas1.Children.Add(p);
                 }
             }
@@ -103,6 +118,8 @@ namespace WpfApp1
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
+                    TypeLabel.Content = String.Empty;
+                    TypeLabel.Content = $"Liczba użytych kolorów: {g1.ListOfVertices.GroupBy(x => x.Color).Count()}";
                     Canvas1.Children.Add(p);
                 }
             }
@@ -110,6 +127,27 @@ namespace WpfApp1
 
         private void GenerateRegular_Click(object sender, RoutedEventArgs e)
         {
+            if(NumOfVertcs.Text == "" || Degree.Text == "")
+            {
+                MessageBox.Show("Nie można wygenerować grafu - brak danych", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            else if (Convert.ToInt32(NumOfVertcs.Text) <= Convert.ToInt32(Degree.Text))
+            {
+                MessageBox.Show("Nie można wygenerować grafu", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                NumOfVertcs.Text = String.Empty;
+                Degree.Text = String.Empty;
+                return;
+            }
+            else if (Convert.ToInt32(NumOfVertcs.Text) < 10 && Convert.ToInt32(Degree.Text) >= 5)
+            {
+                MessageBox.Show("Nie można wygenerować grafu", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                NumOfVertcs.Text = String.Empty;
+                Degree.Text = String.Empty;
+                return;
+            }
+          
+
             TypeLabel.Content = "Graf regularny";
             if (RegVertcs.IsChecked == true)
             {
@@ -144,6 +182,8 @@ namespace WpfApp1
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
+                    TypeLabel.Content = String.Empty;
+                    TypeLabel.Content = $"Liczba użytych kolorów: {g1.ListOfVertices.GroupBy(x => x.Color).Count()}";
                     Canvas1.Children.Add(p);
                 }
             }
@@ -165,6 +205,7 @@ namespace WpfApp1
                     edgesToDraw[i].X2 = g1.ListOfEdges[i].EndPoint.X;
                     edgesToDraw[i].Y2 = g1.ListOfEdges[i].EndPoint.Y;
                     edgesToDraw[i].StrokeThickness = 2;
+                    
                     Canvas1.Children.Add(edgesToDraw[i]);
                 }
                 g1.ColorVerticesOfGraph();
@@ -180,9 +221,12 @@ namespace WpfApp1
                     double left = g1.ListOfVertices[i].X - (p.myEllipse.Width / 2);
                     double top = g1.ListOfVertices[i].Y - (p.myEllipse.Height / 2);
                     p.Margin = new Thickness(left, top, 0, 0);
+                    TypeLabel.Content = String.Empty;
+                    TypeLabel.Content = $"Liczba użytych kolorów: {g1.ListOfVertices.GroupBy(x => x.Color).Count()}";
                     Canvas1.Children.Add(p);
                 }
             }
+        
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
