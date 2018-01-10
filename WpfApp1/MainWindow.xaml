@@ -42,6 +42,7 @@
             <Button Height="35" Width="200" Margin="0 0 0 -60" Name="Clear" Content="Czyść" FontSize="17" Click="Wyczyść_Click"/>
             <Grid Grid.Column="1">
                 <Canvas Width="619" Height="571" Background="White" Name ="Canvas1"/>
+                <Label Name="TitleLabel" Margin="10 520 80 0" FontSize="16"/>
                 <Label Name="TypeLabel" Margin="10 540 80 0" FontSize="16"/>
             </Grid>
         </Grid>

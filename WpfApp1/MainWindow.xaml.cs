@@ -28,6 +28,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            Search.IsEnabled = false;
         }
 
         private void Wyczyść_Click(object sender, RoutedEventArgs e)
@@ -40,6 +41,8 @@ namespace WpfApp1
             TypeLabel.Content = String.Empty;
             RegVertcs.IsChecked = false;
             RndVertcs.IsChecked = false;
+            Search.IsEnabled = false;
+            TitleLabel.Content = String.Empty;
         }
 
         private void GrafOkreślony_Click(object sender, RoutedEventArgs e)
@@ -65,11 +68,12 @@ namespace WpfApp1
                 MessageBox.Show("Nie można wygenerować grafu - brak wybranego rozmieszczenia wierzchołków", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            TypeLabel.Content = "Graf prosty";
             if (RegVertcs.IsChecked == true)
             {
+                TitleLabel.Content = "Graf prosty";
                 GenerateRegular.IsEnabled = false;
                 GenerateSimple.IsEnabled = false;
+                Search.IsEnabled = true;
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
                 Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
@@ -104,6 +108,10 @@ namespace WpfApp1
             }
             else if (RndVertcs.IsChecked == true)
             {
+                TitleLabel.Content = "Graf prosty";
+                GenerateRegular.IsEnabled = false;
+                GenerateSimple.IsEnabled = false;
+                Search.IsEnabled = true;
                 g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
                 g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
                 Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
@@ -180,11 +188,12 @@ namespace WpfApp1
             }
           
 
-            TypeLabel.Content = "Graf regularny";
             if (RegVertcs.IsChecked == true)
             {
+                TitleLabel.Content = "Graf regularny";
                 GenerateRegular.IsEnabled = false;
                 GenerateSimple.IsEnabled = false;
+                Search.IsEnabled = true;
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 bool isDrawn = false;
                 while (isDrawn == false)
@@ -223,6 +232,10 @@ namespace WpfApp1
             }
             else if (RndVertcs.IsChecked == true)
             {
+                TitleLabel.Content = "Graf regularny";
+                GenerateRegular.IsEnabled = false;
+                GenerateSimple.IsEnabled = false;
+                Search.IsEnabled = true;
                 g1 = Graph.GenerateVerticesOfGraphRandomly(Convert.ToInt32(NumOfVertcs.Text));
                 bool isDrawn = false;
                 while (isDrawn == false)
