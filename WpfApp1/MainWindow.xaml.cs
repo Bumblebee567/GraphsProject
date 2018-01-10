@@ -127,7 +127,14 @@ namespace WpfApp1
 
         private void GenerateRegular_Click(object sender, RoutedEventArgs e)
         {
-            if(NumOfVertcs.Text == "" || Degree.Text == "")
+            if(Convert.ToInt32(NumOfVertcs.Text)%2 == 1 && Convert.ToInt32(Degree.Text) == 1)
+            {
+                MessageBox.Show("Nie można wygenerować grafu - złe dane", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                NumOfVertcs.Text = String.Empty;
+                Degree.Text = String.Empty;
+                return;
+            }
+            else if(NumOfVertcs.Text == "" || Degree.Text == "")
             {
                 MessageBox.Show("Nie można wygenerować grafu - brak danych", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
