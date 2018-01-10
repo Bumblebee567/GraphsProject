@@ -33,7 +33,13 @@ namespace WpfApp1
         private void Wyczyść_Click(object sender, RoutedEventArgs e)
         {
             Canvas1.Children.Clear();
+            GenerateSimple.IsEnabled = true;
+            GenerateRegular.IsEnabled = true;
+            Degree.Text = String.Empty;
+            NumOfVertcs.Text = String.Empty;
             TypeLabel.Content = String.Empty;
+            RegVertcs.IsChecked = false;
+            RndVertcs.IsChecked = false;
         }
 
         private void GrafOkreślony_Click(object sender, RoutedEventArgs e)
@@ -54,9 +60,16 @@ namespace WpfApp1
                 Degree.Text = String.Empty;
                 return;
             }
+            if(RndVertcs.IsChecked == false && RegVertcs.IsChecked == false)
+            {
+                MessageBox.Show("Nie można wygenerować grafu - brak wybranego rozmieszczenia wierzchołków", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             TypeLabel.Content = "Graf prosty";
             if (RegVertcs.IsChecked == true)
             {
+                GenerateRegular.IsEnabled = false;
+                GenerateSimple.IsEnabled = false;
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 g1.GenerateEdgesOfRandomGraph(g1, Convert.ToInt32(Degree.Text));
                 Line[] edgesToDraw = new Line[g1.ListOfEdges.Count];
@@ -127,7 +140,19 @@ namespace WpfApp1
 
         private void GenerateRegular_Click(object sender, RoutedEventArgs e)
         {
-            if(Convert.ToInt32(NumOfVertcs.Text)%2 == 1 && Convert.ToInt32(Degree.Text) == 1)
+            if (RndVertcs.IsChecked == false && RegVertcs.IsChecked == false)
+            {
+                MessageBox.Show("Nie można wygenerować grafu - brak wybranego rozmieszczenia wierzchołków", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            else if (Convert.ToInt32(NumOfVertcs.Text) > 21)
+            {
+                MessageBox.Show("Nie można wygenerować grafu - zbyt duża ilość wierzchołków", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                NumOfVertcs.Text = String.Empty;
+                Degree.Text = String.Empty;
+                return;
+            }
+            else if(Convert.ToInt32(NumOfVertcs.Text)%2 == 1 && Convert.ToInt32(Degree.Text) == 1)
             {
                 MessageBox.Show("Nie można wygenerować grafu - złe dane", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
                 NumOfVertcs.Text = String.Empty;
@@ -158,6 +183,8 @@ namespace WpfApp1
             TypeLabel.Content = "Graf regularny";
             if (RegVertcs.IsChecked == true)
             {
+                GenerateRegular.IsEnabled = false;
+                GenerateSimple.IsEnabled = false;
                 g1 = Graph.GenerateVerticesGraph(Convert.ToInt32(NumOfVertcs.Text));
                 bool isDrawn = false;
                 while (isDrawn == false)
@@ -240,6 +267,8 @@ namespace WpfApp1
         {
             var matrix = g1.GenerateAdjacencyMatrix();
             var sb = new StringBuilder();
+            sb.AppendLine("Graph generator v1.0 - macierz sąsiedztwa:");
+            sb.AppendLine();
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
@@ -249,6 +278,8 @@ namespace WpfApp1
                 sb.AppendLine();
             }
             sb.AppendLine();
+            sb.AppendLine("Ciąg przeszukania grafu wszerz: ");
+            sb.AppendLine();
             var a = Graph.BFS(matrix, g1);
             for (int i = 0; i < a.Count; i++)
             {
@@ -256,7 +287,7 @@ namespace WpfApp1
             }
             File.WriteAllText("wyniki.txt", string.Empty);
             File.AppendAllText("wyniki.txt", sb.ToString());
-            Process.Start("C:/Users/Admin/Source/Repos/GraphsProject3/WpfApp1/bin/Debug/wyniki.txt");
+            Process.Start("wyniki.txt");
         }
     }
 }
